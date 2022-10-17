@@ -1,0 +1,25 @@
+import { GridItemType } from '../../types/GridItemType';
+import * as C from './styles';
+import b7 from '../../svgs/b7.svg';
+import { items } from '../../data/items'
+
+type Props = {
+    item: GridItemType,
+    onClick: () => void
+}
+
+export const GridItem = ({item, onClick}: Props) => {
+    return (
+        <C.Container
+            showBkg={item.permanentShown || item.shown}
+            onClick={onClick}
+        >
+            {item.permanentShown === false && item.shown === false &&
+                <C.Icon src={b7} opacity={.2} alt="B&" />
+            }
+            { (item.permanentShown || item.shown) && item.item !== null &&
+                <C.Icon src={items[item.item].icon} alt="{items[item.item].name}" />
+            }
+        </C.Container>
+    );
+}
